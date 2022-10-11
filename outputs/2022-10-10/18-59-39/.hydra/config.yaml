@@ -1,0 +1,6 @@
+main:
+  project_name: HR_analytics_DS_job_change
+  env: dev
+data:
+  train_path: data/raw/aug_train.csv
+  test_path: data/raw/aug_test.csv
