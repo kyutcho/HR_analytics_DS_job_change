@@ -1,0 +1,22 @@
+name: hr_analytics_proj
+
+conda_env: conda.yaml
+
+entry_points:
+  get_data:
+    parameters:
+      config: {type: string}
+    command: "python get_data.py --config {config}"
+
+  preprocess_data:
+    parameters:
+      config: {type: string}
+    command: "python preprocess_data.py --config {config}"
+
+  train_model:
+    parameters:
+      config: {type: string}
+      model: {type: string, default: "model"}
+    command: "python train_model.py --config {config} --model {model}"
+
+  

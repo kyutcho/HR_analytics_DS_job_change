@@ -1,0 +1,12 @@
+name: conda_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pandas=1.4.3
+  - scikit-learn=1.1.3
+  - pip=22.1.2
+  - pip:
+    - mlflow==1.28.0
+    - dvc==2.31.0
+    - dvc-gdrive==2.19.0

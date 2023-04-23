@@ -1,0 +1,4 @@
+gdrive://1N7rCdPS0Gv1qOTIfeOQSccV9GKZeoSsQ/ef/95116ea7bad934d2f3967db4f2363c.dir
+train num rows: 19158
+train num cols: 14
+train path: data/raw/aug_train.csv

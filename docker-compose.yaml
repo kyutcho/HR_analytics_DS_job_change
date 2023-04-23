@@ -1,0 +1,59 @@
+version: '3.3'
+services:
+  s3:
+    image:
+    container_name:
+    ports: 
+      - "8000:8888"
+    environment:
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    command:
+      cmd
+  db:
+    restart: always
+    image: postgres:13
+    container_name: postgres_mlflow_db
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POTGRES_USER=$POTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    volumes:
+      - postgres_data:/var/lib/postgresql/postgres_data
+    expose:
+      - "5432"
+  mlflow:
+    container_name: mlflow_ctnr
+    image: mlflow_img
+    build:
+      context: ./mlflow
+      dockerfile: Dockerfile
+    expose:
+      - "5000"
+    environment:
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - AWS_REGION=$AWS_REGION
+    command: mlflow server --backend-store-uri postgresql+psycopg2://$POTGRES_USER:$POSTGRES_PASSWORD@db:5432/$POSTGRES_DB --default-artifact-root s3://$AWS_BUCKET_NAME/mlflow --host 0.0.0.0
+
+  nginx:
+    restart: always
+    # build: ./nginx
+    image: mlflow_nginx
+    container_name: mlflow_nginx
+    build:
+      context: ./mlflow
+      dockerfile: nginx_dockerfile
+    ports: 
+      - "80:80"
+    networks:
+      - frontend
+    depends_on: 
+      - mlflow
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+

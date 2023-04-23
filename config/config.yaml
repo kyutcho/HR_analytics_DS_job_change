@@ -2,6 +2,18 @@ main:
   project_name: HR_analytics_DS_job_change
   env: dev
 
-data:
-  train_path: data/raw/aug_train.csv
-  test_path: data/raw/aug_test.csv
+mlflow:
+  tracking_uri: "http://127.0.0.1:5000"
+
+dvc:
+  dvc_proj: data
+  remote_name: myremote
+  train_data: data/raw/aug_train.csv
+  test_data: data/raw/aug_test.csv
+  processed_train_data: data/processed/train_processed.csv
+  processed_test_data: data/processed/test_processed.csv
+
+model:
+  test_model: model.yaml
+  logistic_regression: lr_config.yaml
+  random_forest: rf_config.yaml

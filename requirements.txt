@@ -1,0 +1,13 @@
+dvc==2.31.0
+hydra-core==1.3.2
+matplotlib==3.5.2
+mlflow==1.28.0
+numpy==1.21.5
+omegaconf==2.2.3
+pandas==1.4.3
+PyYAML==6.0
+scikit_learn==1.1.3
+seaborn==0.11.2
+fastapi==0.82.0
+SQLAlchemy==1.4.41
+docker==5.0.3
